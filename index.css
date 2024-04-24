@@ -1,0 +1,202 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    background: -webkit-linear-gradient(25deg, #FFBE0B, #FB5607, #FF006E, #8338EC, #3A86FF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
+#content_container {
+    width: 30%;
+    height: 90%;
+}
+
+h3 {
+    color :#000;
+}
+
+#form_container {
+    width: 100%;
+    height: 100%;
+    background: -webkit-linear-gradient(25deg, #ffde82, #f9a37c, #ff8dbe, #bf93fd, #a5c7ff);
+    box-shadow: 0 0 50px -20px #000;
+    border-radius: 2%;
+    overflow: hidden;
+}
+
+#form_header_container {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    padding: 20px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: 1px solid transparent;
+    background: -webkit-linear-gradient(25deg, #FFBE0B, #FB5607, #FF006E, #8338EC, #3A86FF) 20;
+}
+
+#form_header {
+    font-size: 20px;
+    font-family: 'Bowlby One SC', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: -webkit-linear-gradient(25deg, #FFBE0B, #FB5607, #FF006E, #8338EC, #3A86FF);
+    background: #000000;
+    -webkit-background-clip: text;
+    background-clip: text; /* Standard property */
+    -webkit-text-fill-color: transparent;
+    display: inline;
+}
+
+#form_content_container {
+    width: 100%;
+    height: 90%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}
+
+#form_content_inner_container {
+    width: 75%;
+    height: 100%;
+    float: left;
+}
+
+input {
+    width: 100%;
+    height: 40px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    background: #fff; /* Set background color to white */
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    color: #000; /* Set text color to black */
+    font-size: 12px;
+    border: 2px solid transparent; /* Remove border-bottom and specify a solid border */
+    border-radius: 2%; /* Add border-radius for all corners */
+}
+
+#button_container {
+    width: 100%;
+    height: 5%;
+    color: #000000;
+    float: left;
+    margin-top: 5px;
+}
+
+#button_container button {
+    width: 48%; /* Adjust the width to accommodate the margin */
+    height: 150%;
+    float: left;
+    background: #007bff;
+    color: inherit;
+    font-family: Montserrat, sans-serif;
+    letter-spacing: 1px;
+    font-weight: 900;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2%; /* Add margin to the right of each button */
+}
+
+.input_field {
+    position: relative;
+    height: 45px;
+    margin-top: 15px;
+    width: 100%;
+  }
+  
+  .refresh_button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: #000000; /* Change background to black */
+    height: 30px;
+    width: 30px;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff; /* Change the color of the inner symbol to white */
+    cursor: pointer;
+}
+
+  .refresh_button:active {
+    transform: translateY(-50%) scale(0.98);
+  }
+  .input_field input,
+  .button button {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+  }
+  .input_field input {
+    padding: 0 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .captch_box input {
+    color: #6b6b6b;
+    font-size: 22px;
+    pointer-events: none;
+  }
+  .captch_input input:focus {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  }
+  
+  .message {
+    font-size: 22px;
+    margin: 14px 0;
+    color: #090033;
+    display: none;
+  }
+  .message.active {
+    display: block;
+  }
+
+  .button button {
+    background: #92c6ff;
+    color: #000000;
+    cursor: pointer;
+    user-select: none;
+  }
+  .button button:active {
+    transform: scale(0.99);
+  }
+  .button.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+footer {
+    width: 100%;
+    height: 50px; /* Adjust the height as needed */
+    background-color: #333; /* Set the background color */
+    color: #fff; /* Set the text color */
+    text-align: center; /* Center-align the content */
+    line-height: 50px; /* Center vertically */
+    position: fixed; /* Position the footer at the bottom of the viewport */
+    bottom: 0; /* Stick it to the bottom */
+    left: 0; /* Align it to the left */
+    right: 0; /* Align it to the right */
+}
+
+

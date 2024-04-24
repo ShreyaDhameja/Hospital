@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noble Hospital Appointment Booking</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5; /* Background color for the entire page */
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+.header {
+    background-color: #09294c; /* Color for the header */
+    color: #fff;
+    padding: 10px 0;
+    font-size: 24px;
+    position: relative;
+    text-align: center;
+}
+
+.logo img {
+    width: 600px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+footer {
+    background-color: #09294c; /* Color for the footer */
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #fdfdfd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="noble.jpg" alt="Noble Hospital Logo">
+            </div>
+        <h1>Book an Appointment at Noble Hospital</h1>
+        <form action="appointmentconfirmed.html" method="post" id="appointmentForm">
+            <label for="patient_name">Patient Name</label>
+            <input type="text" id="patient_name" name="patient_name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" name="phone" required>
+
+            <label for="appointment_date">Appointment Date</label>
+            <input type="date" id="appointment_date" name="appointment_date">
+
+
+            <label for="department">Department</label>
+            <select id="department" name="department" required>
+                <option value="">Select Department</option>
+                <option value="Emergency Care">Emergency Care</option>
+                <option value="General Medicine">General Medicine</option>
+                <option value="Surgery">Surgery</option>
+                <option value="Maternity Care">Maternity Care</option>
+                <option value="Diagnostic Imaging">Diagnostic Imaging</option>
+                <option value="Rehabilitation Services">Rehabilitation Services</option>
+            </select>
+
+            <input type="submit" value="Book Appointment">
+        </form>
+    </div>
+    <footer>
+        &copy; 2010 Noble Hospital | All Rights Reserved
+    </footer>
+    <script>
+        // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCbmsGIvQ2ouzWR14RHqFsyoD14OE_c5B0",
+    authDomain: "fir-ee0b4.firebaseapp.com",
+    databaseURL: "https://fir-ee0b4-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "fir-ee0b4",
+    storageBucket: "fir-ee0b4.appspot.com",
+    messagingSenderId: "412761372358",
+    appId: "1:412761372358:web:ade1d4747e0307f563c9c7",
+    measurementId: "G-31DDE1MKCD"
+  };
+        document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent the default form submission
+    
+          // Perform form validation
+          var patientName = document.getElementById('patient_name').value;
+          var email = document.getElementById('email').value;
+          var phoneNumber = document.getElementById('phone').value;
+          var appointmentDate = document.getElementById('appointment_date').value;
+          var department = document.getElementById('department').value;
+    
+          // Your validation logic here
+          if (patientName.trim() === '' || email.trim() === '' || phoneNumber.trim() === '' || appointmentDate.trim() === '' || department.trim() === '') {
+            alert('All fields are required');
+            event.preventDefault();
+            return false;
+          }
+    
+          // If validation passes, redirect to the appointment success page
+          console.log('Redirecting to appointment success page...');
+          window.location.href = 'appointmentconfirmed.html' + 
+            '?patient_name=' + encodeURIComponent(patientName) +
+            '&email=' + encodeURIComponent(email) +
+            '&phone=' + encodeURIComponent(phoneNumber) +
+            '&appointment_date=' + encodeURIComponent(appointmentDate) +
+            '&department=' + encodeURIComponent(department);
+        });
+
+        firebase.initializeApp(firebaseConfig);
+
+        // Reference your database
+var appointmentFormDB = firebase.database().ref("appointments");
+
+document.getElementById("appointmentForm").addEventListener("submit", submitForm);
+
+function submitForm(e) {
+  e.preventDefault();
+
+  var patientName = getElementVal("patient_name");
+  var email = getElementVal("email");
+  var phone = getElementVal("phone");
+  var appointmentDate = getElementVal("appointment_date");
+  var department = getElementVal("department");
+
+  saveAppointment(patientName, email, phone, appointmentDate, department);
+
+  // Display alert
+  document.querySelector(".alert").style.display = "block";
+
+  // Hide the alert after 3 seconds
+  setTimeout(() => {
+    document.querySelector(".alert").style.display = "none";
+  }, 3000);
+
+  // Reset the form
+  document.getElementById("appointmentForm").reset();
+}
+
+const saveAppointment = (patientName, email, phone, appointmentDate, department) => {
+  var newAppointment = appointmentFormDB.push();
+
+  newAppointment.set({
+    patientName: patientName,
+    email: email,
+    phone: phone,
+    appointmentDate: appointmentDate,
+    department: department
+  });
+};
+
+const getElementVal = (id) => {
+  return document.getElementById(id).value;
+};
+    </script>
+</body>
+</html>
